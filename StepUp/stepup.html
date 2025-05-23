@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Maps</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .sidebar {
+            width: 20%;
+            padding: 20px;
+            background-color: #f4f4f4;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo {
+            width: 80%;
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+        .content {
+            width: 80%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            overflow: auto;
+        }
+        .menu button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .menu button:hover {
+            background-color: #0056b3;
+        }
+        .maps {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .map {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        #legend {
+            margin-top: 20px;
+            width: 100%;
+            text-align: left;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .legend-others { background-color: #1f77b4; } /* Blue */
+        .legend-phystec { background-color: #2ca02c; } /* Green */
+        .legend-coordinator { background-color: #d62728; } /* Red */
+        .legend-none { background-color: #7f7f7f; } /* Grey */
+        .legend-ambassador { background-color: #ff7f0e; } /* Orange */
+    
+         /* Media queries for responsive font size and legend color size */
+    @media (max-width: 768px) {
+        #legend {
+            font-size: 14px;
+        }
+        .legend-color {
+            width: 14px;
+            height: 14px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        #legend {
+            font-size: 12px;
+        }
+        .legend-color {
+            width: 12px;
+            height: 12px;
+        }
+    }
+
+    @media (max-width: 375px) {
+        #legend {
+            font-size: 10px;
+        }
+        .legend-color {
+            width: 10px;
+            height: 10px;
+        }
+    }
+    </style>    
+</head>
+<body>
+    <div class="sidebar">
+        <img src="logo.svg" alt="Logo" class="logo">
+        <div class="menu">
+            <button onclick="showMaps('chicago')">Chicago</button>
+            <button onclick="showMaps('la')">Los Angeles</button>
+            <button onclick="showMaps('nyc')">New York City</button>
+        </div>
+        <div id="legend">
+            <div class="legend-item">
+                <div class="legend-color legend-others"></div>
+                <span>Others</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-phystec"></div>
+                <span>PhysTEC Lead</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-coordinator"></div>
+                <span>Regional Coordinator</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-none"></div>
+                <span>None</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-ambassador"></div>
+                <span>Ambassador</span>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div id="chicago" class="maps">
+            <iframe class="map" src="pre_ch.html"></iframe>
+            <iframe class="map" src="post_ch.html"></iframe>
+        </div>
+        <div id="la" class="maps">
+            <iframe class="map" src="pre_la.html"></iframe>
+            <iframe class="map" src="post_la.html"></iframe>
+        </div>
+        <div id="nyc" class="maps">
+            <iframe class="map" src="pre_nyc.html"></iframe>
+            <iframe class="map" src="post_nyc.html"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function showMaps(city) {
+            const maps = document.querySelectorAll('.maps');
+            maps.forEach(map => map.style.display = 'none');
+            document.getElementById(city).style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
